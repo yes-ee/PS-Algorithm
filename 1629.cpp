@@ -1,24 +1,24 @@
 #include <iostream>
+
 using namespace std;
 
 int a, b, c;
 
-long long pow(int b)
-{
-	if (b == 1)
+long long pow(int a, int n) {
+	if (n == 1) 
 		return a % c;
 
-	long long x = pow(b / 2) % c;
-
-	if (b % 2 == 0)
+	long long x = pow(a, n/2) % c;
+	if (n % 2 == 0) 
 		return x * x % c;
-	else
-		return x * x % c * a % c;
+	else 
+		return x * x % c *  a % c;
 }
 
-int main()
-{
+int main() {
 	cin >> a >> b >> c;
 
-	cout << pow(b);
+	cout << pow(a, b);
+
+	return 0;
 }
