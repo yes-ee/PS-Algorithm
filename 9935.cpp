@@ -1,3 +1,7 @@
+// stack
+// 짝맞추기 -> stack으로 풀기
+// stack 대신 string 사용 가능
+
 #include <iostream>
 #include <string>
 #include <algorithm>
