@@ -49,12 +49,11 @@ int main() {
 		int a, b;
 		cin >> a >> b;
 
-		if (flag) continue;
-
 		merge(a, b);
 
 		if (flag) {
 			cout << i + 1;
+			return 0;
 		}
 	}
 
