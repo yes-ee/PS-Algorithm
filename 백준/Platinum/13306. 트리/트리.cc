@@ -9,15 +9,15 @@
 using namespace std;
 
 int n, q;
-vector<int> t;	// 트리 정보(부모 노드 저장)
 vector<pair<int, int>> query;
 int p[200001];
+int t[200001];
 vector<string> ans;
 
 int find(int u) {
 	if (p[u] == u) return u;
 
-	return find(p[u]);
+	return p[u] = find(p[u]);
 }
 
 void merge(int u, int v) {
@@ -37,15 +37,11 @@ int main() {
 
 	for (int i = 0; i <= n; i++) {
 		p[i] = i;
+		t[i] = i;
 	}
 
-	t.push_back(0);
-	t.push_back(1);
-	for (int i = 0; i < n - 1; i++) {
-		int a;
-		cin >> a;
-		t.push_back(a);
-	}
+	for (int i = 2; i <= n; i++)
+		cin >> t[i];
 
 	for (int i = 0; i < q + n - 1; i++) {
 		int a, b, c = -1;
