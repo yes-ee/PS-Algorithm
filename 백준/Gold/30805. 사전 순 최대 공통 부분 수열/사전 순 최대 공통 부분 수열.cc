@@ -4,7 +4,6 @@
 using namespace std;
 
 int n;
-int use[101];
 vector<int> ans;
 vector<int> a;
 vector<int> b;
@@ -17,8 +16,7 @@ int main()
 
 	cin >> n;
 
-	while (n--)
-	{
+	while (n--) {
 		int in;
 		cin >> in;
 		a.push_back(in);
@@ -26,34 +24,34 @@ int main()
 
 	cin >> n;
 
-	while (n--)
-	{
+	while (n--) {
 		int in;
 		cin >> in;
 		b.push_back(in);
 	}
 
-	for (int j = 0; j < a.size(); j++) {
+	while (1) {
 		int mx = -1;
-		int mx_idx = -1;
+		int ax, bx;
 
 		for (int i = ai; i < a.size(); i++) {
-			if (!use[i] && mx < a[i]) {
-				mx_idx = i;
-				mx = a[i];
+			for (int j = bi; j < b.size(); j++) {
+				// 제일 크면서 b에 존재
+				if (a[i] > mx && a[i] == b[j]) {
+					mx = a[i];
+					ax = i + 1;
+					bx = j + 1;
+				}
 			}
 		}
 
-		for (int i = bi; i < b.size(); i++) {
-			if (b[i] == a[mx_idx]) {
-				ai = mx_idx + 1;
-				bi = i + 1;
-				ans.push_back(a[mx_idx]);
-				break;
-			}
-		}
+		// 더이상 공통 수가 존재 x
+		if (mx == -1)
+			break;
 
-		use[mx_idx] = 1;
+		ans.push_back(mx);
+		ai = ax;
+		bi = bx;
 	}
 
 	cout << ans.size() << "\n";
