@@ -48,6 +48,7 @@ int main() {
 		} else {
 			int ans = find(1, 1, 1000000, b);
 			update(1, 1, 1000000, ans, -1);
+			arr[ans]--;
 
 			cout << ans << "\n";
 		}
