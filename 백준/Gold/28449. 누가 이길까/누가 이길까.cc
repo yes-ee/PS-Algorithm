@@ -5,10 +5,10 @@
 using namespace std;
 using ll = long long;
 
-ll n, m;
+int n, m;
 ll asum, bsum, sm, total;
-vector<ll> a, b;
-map<ll, ll> mb;
+vector<int> a, b;
+map<int, int> mb;
 
 int main()
 {
@@ -17,14 +17,16 @@ int main()
 
 	cin >> n >> m;
 
-	ll num;
-	total = n * m;
+	int num;
+	total = (ll) n * m;
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
+	{
 		cin >> num;
 		a.push_back(num);
 	}
-	for (int i = 0; i < m; i++) {
+	for (int i = 0; i < m; i++)
+	{
 		cin >> num;
 		if (mb.count(num) == 0)
 			b.push_back(num);
@@ -34,22 +36,26 @@ int main()
 	sort(a.begin(), a.end());
 	sort(b.begin(), b.end());
 
-
-	ll aidx = 0;
-	ll bidx = 0;
-	ll blen = mb.size();
+	int aidx = 0;
+	int bidx = 0;
+	int blen = mb.size();
 	ll awin = 0;
 
-	for (; aidx < n; aidx++) {
-		while (bidx < blen && b[bidx] < a[aidx]) {
+	for (; aidx < n; aidx++)
+	{
+		while (bidx < blen && b[bidx] < a[aidx])
+		{
 			awin += mb[b[bidx]];
 			bidx++;
 		}
 
-		if (a[aidx] == b[bidx]) {
+		if (a[aidx] == b[bidx])
+		{
 			asum += awin;
 			sm += mb[b[bidx]];
-		} else { // b > a
+		}
+		else
+		{ // b > a
 			asum += awin;
 		}
 	}
@@ -58,5 +64,3 @@ int main()
 
 	return 0;
 }
-
-
