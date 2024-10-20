@@ -13,7 +13,6 @@ vector<int> graph[10001];
 int dp[2][10001];
 int person[10001];
 bool visited[10001];
-int p[10001];
 
 void dfs(int cur) {
 	visited[cur] = true;
@@ -23,7 +22,6 @@ void dfs(int cur) {
 
 	for (auto i : graph[cur]) {
 		if (visited[i]) continue;
-		p[i] = cur;
 
 		dfs(i); // i까지 최대 주민 수 값 받아옴
 		// 내가 우수 마을이 아님 -> 주변 우수마을이거나, 아니거나
@@ -50,10 +48,6 @@ int main() {
 	}
 
 	dfs(1); // 1번 마을부터 시작
-
-	// for (int i = 1; i <= n; i++) {
-	// 	cout << dp[0][i] << " " << dp[1][i] << endl;
-	// }
 
 	cout << max(dp[0][1], dp[1][1]);
 
