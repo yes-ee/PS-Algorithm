@@ -14,10 +14,6 @@ ll dp[501][501];
 m mt[501];
 
 void re(int st, int end) {
-	if (st == end) {
-		return;
-	}
-
 	for (int i = st; i < end; i++) {
 		if (dp[st][i] == 1e9) re(st, i);
 		if (dp[i + 1][end] == 1e9) re(i + 1, end);
