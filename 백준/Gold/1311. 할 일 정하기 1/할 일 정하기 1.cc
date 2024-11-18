@@ -5,23 +5,23 @@ using ll = long long;
 
 int n;
 vector<int> d[21];
-int dp[1 << 21][21];
+int dp[1 << 21];
 
 int dfs(int mask, int x) {
 	if (x == n + 1) return 0;
 
-	if (dp[mask][x]) return dp[mask][x];
+	if (dp[mask]) return dp[mask];
 
-	dp[mask][x] = 1e9;
+	dp[mask] = 1e9;
 
 	for (int i = 1; i <= n; i++) {
 		// 이미 한 일이면 패스
 		if (mask & (1 << i)) continue;
 
-		dp[mask][x] = min(dp[mask][x], dfs(mask | (1 << i), x + 1) + d[x][i]);
+		dp[mask] = min(dp[mask], dfs(mask | (1 << i), x + 1) + d[x][i]);
 	}
 
-	return dp[mask][x];
+	return dp[mask];
 }
 
 int main()
