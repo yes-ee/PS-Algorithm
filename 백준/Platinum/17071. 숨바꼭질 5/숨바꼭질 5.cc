@@ -2,35 +2,44 @@
 #include <queue>
 
 using namespace std;
-using pii=pair<int, int>;
 
 int n, k;
-queue<pii> q;
+queue<int> q;
 int visited[2][500001];
-int goal[1001];
 int end_time;
+int goal;
 
 int bfs() {
+    int time = 1;
     visited[0][n] = 1;
-    q.push({n, 0});
+    q.push(n);
     while (!q.empty()) {
-        int x = q.front().first;
-        int time = q.front().second;
-        q.pop();
-        if (time >= end_time) continue;
+        // bfs depth 깊이 세기 위해 사이즈 사용
+        int sz = q.size();
+        goal += time;
 
-        for (int nx : {x+1, x-1, x * 2}) {
-            int nt = time +1;
-            if (nx < 0 || nx > 500000) continue;
-            if (!visited[nt%2][nx]) {
-                visited[nt%2][nx] = 1;
-                q.push({nx, nt});
-            }
-            // 만나는지 체크
-            if (visited[nt%2][goal[nt]]) {
-                return nt;
+        if (goal > 500000) return -1;
+
+        // 이전에 방문한 적 있는지 확인
+        if (visited[time%2][goal]) {
+            return time;
+        }
+
+        for (int i = 0; i < sz; i++) {
+            int x = q.front(); q.pop();
+
+            for (int nx : {x+1, x-1, x * 2}) {
+                if (goal == nx) {
+                    return time;
+                }
+                if (nx < 0 || nx > 500000) continue;
+                if (!visited[time%2][nx]) {
+                    visited[time%2][nx] = 1;
+                    q.push(nx);
+                }
             }
         }
+        time++;
     }
     return -1;
 }
@@ -43,16 +52,8 @@ int main() {
         return 0;
     }
 
-    goal[0] = k;
+    goal = k;
 
-    // 동생 위치 저장
-    for (int i = 1; i <= 1000; i++) {
-        goal[i] = goal[i-1] + i;
-        if (goal[i] > 500000) {
-            end_time = i - 1;
-            break;
-        }
-    }
     int ans = bfs();
 
     cout << ans;
