@@ -29,16 +29,17 @@ int bfs() {
         }
     }
 
+    int fqs, qs, x, y, nx, ny;
     while (!q.empty()) {
         // update fire location
-        int fqs = fq.size();
+        fqs = fq.size();
         for (int i = 0; i < fqs; i++) {
-            int y = fq.front().first;
-            int x = fq.front().second;
+            y = fq.front().first;
+            x = fq.front().second;
             fq.pop();
             for (int k=0; k<4; k++) {
-                int ny = dy[k] + y;
-                int nx = dx[k] + x;
+                ny = dy[k] + y;
+                nx = dx[k] + x;
                 if (nx < 0 || nx >= w || ny < 0 || ny >= h || arr[ny][nx] == 'F' || arr[ny][nx] == '#') continue;
                 arr[ny][nx] = 'F';
                 fq.push({ny, nx});
@@ -46,16 +47,16 @@ int bfs() {
         }
 
         // update player next location
-        int qsize = q.size();
+        qs = q.size();
         tm++;
-        for (int i = 0; i < qsize; i++) {
-            int y = q.front().first;
-            int x = q.front().second;
+        for (int i = 0; i < qs; i++) {
+            y = q.front().first;
+            x = q.front().second;
             q.pop();
 
             for (int j = 0; j < 4; j++) {
-                int ny = y + dy[j];
-                int nx = x + dx[j];
+                ny = y + dy[j];
+                nx = x + dx[j];
                 if (nx < 0 || nx >= w || ny < 0 || ny >= h) return tm;
                 if (arr[ny][nx] == 'F'|| arr[ny][nx] == '#' || visited[ny][nx]) continue;
                 visited[ny][nx] = 1;
