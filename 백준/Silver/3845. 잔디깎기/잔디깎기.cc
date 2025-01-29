@@ -15,9 +15,6 @@ int main() {
     while (1) {
         cin >> nx >> ny >> w;
         if (nx == 0 && ny == 0 && w == 0.0) break;
-        for (int i = 0; i < 1001; i++) {
-            xis[i] = yis[i] = 0;
-        }
 
         for (int i = 0; i < nx; i++) cin >> xis[i];
         for (int i = 0; i < ny; i++) cin >> yis[i];
