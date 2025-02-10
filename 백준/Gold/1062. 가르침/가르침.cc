@@ -1,65 +1,62 @@
-// bitmasking
+// dfs
+// bitmask
 
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-int n, k;
-int arr[50];
+int words[50];
+int state;
+int n, k, ans;
 string s;
-int ans, cnt, word;
 
-void re(int idx, int len) {
-	if (len == k) {
-		// count readable word
-		cnt = 0;
-		for (int i = 0; i < n; i++) {
-			if ((word | arr[i]) == word) cnt++;
-		}
-		ans = max(cnt, ans);
-		return;
-	}
 
-	for (int i = idx; i < 26 - k + len + 1; i++) {
-		if (1 << i & word) continue;
+void dfs(int idx, int cnt) {
+    if (cnt == k) {
+        int rd = 0;
+        // count readable words
+        for (int i = 0; i < n; i++) {
+            if ((state & words[i]) == words[i]) rd++;
+        }
+        ans = max(ans, rd);
+        return;
+    }
 
-		// select
-		word |= 1 << i;
-		re(i + 1, len + 1);
-		word &= ~(1 << i);
-	}
+    for (int i = idx + 1; i < 26; i++) {
+        if (state & (1 << i)) continue; // if exist
+        state |= (1 << i);
+        dfs(i, cnt + 1);
+        state -= (1 << i);
+    }
 }
 
 int main() {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cin >> n >> k;
+    ios_base::sync_with_stdio(0); cin.tie(0);
 
-	if (k < 5) {
-		cout << 0;
-		return 0;
-	}
+    cin >> n >> k;
 
-	string s = "acint";
+    int base = 1 | (1 << ('c' - 'a')) | (1 << ('i' - 'a')) | (1 << ('t' - 'a')) | (1 << ('n' - 'a'));
+    state = base;
+    k -= 5;
 
-	for (char c : s) {
-		word |= (1 << c - 'a');
-	}
+    for (int i = 0; i < n; i++) {
+        cin >> s;
+        int word = base;
 
-	k -= 5;
+        for (auto c : s) {
+            word |= (1 << (c - 'a'));
+        }
+        words[i] = word;
+    }
 
-	for (int i = 0; i < n; i++) {
-		cin >> s;
-		for (int j = 0; j < s.length(); j++) {
-			int c = s[j] - 'a';
-			arr[i] |= (1 << c); // add alphabet
-		}
-	}
+    if (k < 0) {
+        cout << 0;
+        return 0;
+    }
 
-	re(0, 0);
+    dfs(-1, 0);
+    cout << ans;
 
-	cout << ans;
-
-	return 0;
+    return 0;
 }
