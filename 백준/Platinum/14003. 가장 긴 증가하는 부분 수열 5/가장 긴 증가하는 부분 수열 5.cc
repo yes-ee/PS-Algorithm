@@ -6,9 +6,8 @@ using namespace std;
 
 int n;
 int arr[1000001];
-int pre[1000001];
+int dp[1000001]; // 최장 부분 수열에서 몇 번째에 위치하고 있는지
 vector<int> v;
-vector<int> v_idx;
 int mx_idx;
 
 int main() {
@@ -16,33 +15,30 @@ int main() {
 
     cin >> n;
     for (int i = 1; i <= n; i++) cin >> arr[i];
-    fill(pre, pre + n + 1, -1);
 
-    v.push_back(-2000000000);
-    v_idx.push_back(0);
     for (int i = 1; i <= n; i++) {
         auto iter = lower_bound(v.begin(), v.end(), arr[i]);
         int idx = iter - v.begin();
         
         if (iter == v.end()) {
             v.push_back(arr[i]);
-            v_idx.push_back(i);
             mx_idx = i;
         } else {
             v[idx] = arr[i];
-            v_idx[idx] = i;
         }
-        pre[i] = v_idx[idx - 1];
+        dp[i] = idx;
     }
 
-    cout << v.size() - 1<< "\n";
+    cout << v.size()<< "\n";
 
     int idx = mx_idx;
+    int cnt = v.size() - 1;
     stack<int> st;
-    while (1) {
-        st.push(arr[idx]);
-        idx = pre[idx];
-        if (idx == 0) break;
+    for (int i = idx; i > 0; i--) {
+        if (dp[i] == cnt) {
+            st.push(arr[i]);
+            cnt--;
+        }
     }
     while (!st.empty()) {
         cout << st.top() << " ";
