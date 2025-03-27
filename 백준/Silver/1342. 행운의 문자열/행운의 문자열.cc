@@ -1,5 +1,3 @@
-// backtracking
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -10,47 +8,51 @@ using namespace std;
 
 string s;
 int len;
+int vis[10];
+vector<char> v;
 int ans;
 map<char, int> m;
 
-void re(int cnt, char pre) {
+bool check() {
+    for (int i = 1; i < len; i++) {
+        if (v[i] == v[i-1]) return false;
+    }
+    return true;
+}
+
+int fac(int n) {
+    int ret = 1;
+    for (int i = 2; i <= n; i++) ret *= i;
+    return ret;
+}
+
+void re(int cnt) {
     if (cnt == len) {
-        ans++;
+        if (check()) ans++;
         return;
     }
-    auto it = m.begin();
-    while (it != m.end()) {
-        char c = it->first;
-        int cn = it->second;
-        if (cn == 0 || c == pre) { // 같은 문자거나 다 사용했으면 패스
-            it++;
-            continue;
-        }
-        m[c]--;
-        re(cnt + 1, c);
-        m[c]++;
-        it++;
+
+    for (int i = 0; i < len; i++) {
+        if (vis[i]) continue;
+        vis[i] = 1;
+        v.push_back(s[i]);
+        re(cnt + 1);
+        v.pop_back();
+        vis[i] = 0;
     }
 }
 
 int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
-
     cin >> s;
     len = s.length();
-    for (int i = 0; i < len; i++) {
-        m[s[i]]++;
-    }
-
-    // map 돌면서 전체 조합 구하기
-    for (auto nxt : m) {
-        char c = nxt.first;
-        char cn = nxt.second;
-        m[c]--;
-        re(1, c);
+    re(0);
+    for (auto c : s) {
         m[c]++;
     }
-
+    for (auto cur : m) {
+        ans /= fac(cur.second);
+    }
     cout << ans;
     return 0;
 }
