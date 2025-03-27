@@ -20,6 +20,13 @@ bool check() {
     return true;
 }
 
+bool check(string s) {
+    for (int i = 1; i < len; i++) {
+        if (s[i] == s[i-1]) return false;
+    }
+    return true;
+}
+
 int fac(int n) {
     int ret = 1;
     for (int i = 2; i <= n; i++) ret *= i;
@@ -46,12 +53,13 @@ int main() {
     ios_base::sync_with_stdio(0); cin.tie(0);
     cin >> s;
     len = s.length();
-    re(0);
+    sort(s.begin(), s.end());
+    do {
+        if (check(s)) ans++;
+    } while (next_permutation(s.begin(), s.end()));
+
     for (auto c : s) {
         m[c]++;
-    }
-    for (auto cur : m) {
-        ans /= fac(cur.second);
     }
     cout << ans;
     return 0;
