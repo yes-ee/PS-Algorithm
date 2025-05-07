@@ -1,9 +1,13 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.Queue;
 import java.util.Collections;
 import java.util.Iterator;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
     static class Pair {
@@ -21,12 +25,14 @@ public class Main {
     static LinkedList<Integer> [] graph;
     static LinkedList<Integer> ans = new LinkedList<>();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        k = sc.nextInt();
-        x = sc.nextInt();
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        k = Integer.parseInt(st.nextToken());
+        x = Integer.parseInt(st.nextToken());
 
         visited = new boolean[n + 1];
         graph = new LinkedList[n + 1];
@@ -36,8 +42,9 @@ public class Main {
         }
 
         for (int i = 0; i < m; i++) {
-            a = sc.nextInt();
-            b = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
 
             graph[a].add(b);
         }
