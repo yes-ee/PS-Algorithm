@@ -1,8 +1,10 @@
-n = int(input())
+import sys
+
+n = int(sys.stdin.readline())
 st = []
 
 for _ in range(0, n):
-    cmd = input().split()
+    cmd = sys.stdin.readline().split()
     s = cmd[0]
     if s == "push":
         num = int(cmd[1])
