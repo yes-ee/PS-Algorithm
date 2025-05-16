@@ -5,7 +5,7 @@ input = sys.stdin.readline
 
 n, l = map(int, input().split())
 arr = list(map(int, input().split()))
-dq = deque() # 값, 인덱스
+dq = deque() # (값, 인덱스)
 ans = []
 
 for i in range(n):
