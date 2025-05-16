@@ -1,13 +1,14 @@
 import sys
 from collections import deque
 
-n = int(sys.stdin.readline())
+input = sys.stdin.readline
+n = int(input())
 
 for _ in range(n):
-    cmd = sys.stdin.readline().strip()
+    cmd = input().strip()
     dq = deque()
-    nn = int(sys.stdin.readline())
-    arr = sys.stdin.readline().strip().lstrip('[').rstrip(']').split(',')
+    nn = int(input())
+    arr = input().strip()[1:-1].split(',')
     if arr[0] != '':
         for num in arr:
             dq.append(int(num))
