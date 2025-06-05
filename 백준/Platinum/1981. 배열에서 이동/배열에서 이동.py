@@ -22,11 +22,13 @@ dx = [1, -1, 0, 0]
 dy = [0, 0, 1, -1]
 
 def bfs(st , ed):
+    if not (st <= arr[0][0] <= ed and st <= arr[-1][-1] <= ed):
+        return -1
+
     q = deque()
     vis = [[0] * n for _ in range(n)]
-    if st <= arr[0][0] <= ed:
-        q.append((0, 0))
-        vis[0][0] = 1
+    q.append((0, 0))
+    vis[0][0] = 1
 
     while q:
         x, y = q.pop()
