@@ -6,20 +6,16 @@ arr = list(map(int, input().split()))
 
 st, ed = 0, 0
 ans = 1e9
-sum = arr[0]
+sum = 0
 
 while ed < n:
-    if sum >= s: # 합이 넘으면 st 한 칸 이동
+    sum += arr[ed]
+    # st 줄일 수 있는 곳까지 갱신
+    while sum >= s:
         ans = min(ans, ed - st + 1)
-
         sum -= arr[st]
-        if st == ed:
-            ed += 1
         st += 1
-    else: # 합이 안 넘으면 ed 한 칸 이동
-        ed += 1
-        if ed < n:
-            sum += arr[ed]
+    ed += 1
 
 if ans == 1e9:
     ans = 0
