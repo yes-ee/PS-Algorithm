@@ -2,42 +2,29 @@ import sys
 input = sys.stdin.readline
 
 n, k = map(int, input().split())
-dic = dict()
-arr = []
+arr = [0 for i in range(1000001)]
 for i in range(n):
     a, b = map(int, input().split())
-    arr.append((a, 1))
-    arr.append((b, -1))
+    arr[a] += 1
+    arr[b] -= 1
 
-arr.sort()
-
-l = arr[0][0]
-r = arr[-1][0]
-
-# 딕셔너리 생성
-pre = 0
-cnt = 0
-arr.append((r + 1, 0))
-for cur, tp in arr:
-    for i in range(pre, cur):
-        dic[i] = cnt
-    pre = cur
-    cnt += tp
+for i in range(1000000):
+    arr[i + 1] += arr[i]
 
 st, ed = 0, 0
-sum = dic[ed]
+sum = arr[ed]
 fin = 0
-while st < r and ed <= r:
+while st < 1000001 and ed <= 1000001:
     if sum == k:
         print(st, ed + 1)
         fin = 1
         break
     elif sum < k:
         ed += 1
-        if ed < r:
-            sum += dic[ed]
+        if ed < 1000001:
+            sum += arr[ed]
     else:
-        sum -= dic[st]
+        sum -= arr[st]
         st += 1
 
 if not fin:
