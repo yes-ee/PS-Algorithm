@@ -13,7 +13,7 @@ mn, mx = 0, 0
 
 for i in range(m+1):
     a, b, c = map(int, input().split())
-    edges.append([1-c, a, b]) # 오르막길 -> 1 내리막길 -> 0
+    edges.append((1-c, a, b)) # 오르막길 -> 1 내리막길 -> 0
 
 p = [i for i in range(n + 1)]
 
