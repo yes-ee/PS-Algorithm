@@ -1,45 +1,37 @@
-# trie
 
 import sys
-input=sys.stdin.readline
+from collections import defaultdict
+
+input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-unused = 2
-ROOT = 1
-MX = 500 * n + 5
-nxt = [[-1 for j in range(26)] for i in range(MX)]
+# 트라이 초기화
+trie = defaultdict(dict)
 
-def insert(s):
-    global unused
+def insert(word):
+    node = trie
+    for char in word:
+        if char not in node:
+            node[char] = {}
+        node = node[char]
 
-    cur = ROOT
-    for c in s:
-        c = ord(c) - ord('a')
-        if nxt[cur][c] == -1:
-            nxt[cur][c] = unused
-            unused += 1
-        cur = nxt[cur][c]
-
-def find(s):
-    cur = ROOT
-    for c in s:
-        c = ord(c) - ord('a')
-        if nxt[cur][c] == -1:
+def find(prefix):
+    node = trie
+    for char in prefix:
+        if char not in node:
             return False
-        cur = nxt[cur][c]
+        node = node[char]
     return True
 
-# 트라이에 단어 추가
-for i in range(n):
-    s = input().strip()
-    insert(s)
+# n개의 문자열 트라이에 삽입
+for _ in range(n):
+    insert(input().strip())
 
+# m개의 문자열이 접두사인지 확인
 ans = 0
-# 단어 찾기
-for i in range(m):
-    s = input().strip()
-    if find(s):
+for _ in range(m):
+    if find(input().strip()):
         ans += 1
 
 print(ans)
