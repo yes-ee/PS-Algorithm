@@ -1,10 +1,10 @@
 # [level 4] 블록 게임 - 42894 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42894) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42894#) 
 
 ### 성능 요약
 
-메모리: 9.36 MB, 시간: 9.00 ms
+메모리: 9.3 MB, 시간: 0.53 ms
 
 ### 구분
 
@@ -12,11 +12,11 @@
 
 ### 채점결과
 
-정확성: 100.0<br/>합계: 100.0 / 100.0
+Empty
 
 ### 제출 일자
 
-2025년 07월 16일 09:41:14
+2025년 07월 16일 09:42:04
 
 ### 문제 설명
 

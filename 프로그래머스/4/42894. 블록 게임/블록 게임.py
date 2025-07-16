@@ -50,10 +50,6 @@ def solution(board):
     chg = 1
     while chg:
         chg = 0
-        # print("--------------")
-        # for i in range(n):
-        #     print(board[i])
-        
         for i in range(len(blocks)):
             grp = blocks[i][0]
             if chk[grp]: continue
@@ -67,9 +63,6 @@ def solution(board):
             for i in range(x1, x2 + 1):
                 if fin: break
                 for j in range(y1, y2 + 1):
-                    if board[i][j] != 0 and board[i][j] != grp:
-                        fin = 1
-                        break
                     if board[i][j] == 0: # 위에 확인
                         for k in range(0, i):
                             if board[k][j] != 0:
