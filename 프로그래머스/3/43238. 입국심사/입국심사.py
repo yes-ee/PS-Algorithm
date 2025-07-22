@@ -1,4 +1,4 @@
-
+# binary search
 
 def solution(n, times):
     length = len(times) # 심사대 개수
