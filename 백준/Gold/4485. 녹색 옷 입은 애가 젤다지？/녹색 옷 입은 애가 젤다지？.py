@@ -20,7 +20,6 @@ while True:
     
     h = []
     h.append((arr[0][0], (0, 0)))
-    heapq.heapify(h)
     dx = [1, -1, 0, 0]
     dy = [0, 0, 1, -1]
 
@@ -29,13 +28,16 @@ while True:
         d = cur[0]
         x, y = cur[1][0], cur[1][1]
 
+        if x == n-1 and y == n-1:
+            break
+
         for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
+            nx, ny = x + dx[i], y + dy[i]
 
             if 0 <= nx < n and 0 <= ny < n:
-                if dis[nx][ny] > d + arr[nx][ny]:
-                    dis[nx][ny] = d + arr[nx][ny]
-                    heapq.heappush(h, (dis[nx][ny], (nx, ny)))
+                nd = d + arr[nx][ny]
+                if dis[nx][ny] > nd:
+                    dis[nx][ny] = nd
+                    heapq.heappush(h, (nd, (nx, ny)))
 
-    print("Problem ", cnt, ": ", dis[n-1][n-1], sep='')                
+    print(f"Problem {cnt}: {dis[n-1][n-1]}")
