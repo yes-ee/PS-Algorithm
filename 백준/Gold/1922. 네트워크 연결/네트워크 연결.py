@@ -43,7 +43,7 @@ for cur in adjs:
     if merge(a, b):
         sum += c
         cnt += 1
-        if cnt >= m:
+        if cnt == n-1:
             break
 
 print(sum)
