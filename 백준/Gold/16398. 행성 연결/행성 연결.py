@@ -7,9 +7,9 @@ arr = []
 adjs = []
 
 for i in range(n):
-    arr.append(list(map(int, input().split())))
+    tmp = list(map(int, input().split()))
     for j in range(i + 1, n):
-        adjs.append((i, j, arr[i][j]))
+        adjs.append((i, j, tmp[j]))
 
 adjs.sort(key=lambda x: x[2])
 
