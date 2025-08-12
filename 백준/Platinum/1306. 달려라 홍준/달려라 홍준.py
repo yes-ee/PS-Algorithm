@@ -6,10 +6,9 @@ n, m = map(int, input().split())
 arr = list(map(int, input().split()))
 
 h = []
-length = 2 * (m-1)
+length = (m-1) << 1
 ans = []
 
-# 첫 길이 추가
 for i in range(min(n, length + 1)):
     hq.heappush(h, (-arr[i], i))
 
@@ -23,5 +22,4 @@ for i in range(1, n - length):
 
     ans.append(-h[0][0])
 
-for i in ans:
-    print(i, end=' ')
+print(' '.join(map(str, ans)))
