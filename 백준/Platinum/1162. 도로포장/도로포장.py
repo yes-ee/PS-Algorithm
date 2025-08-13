@@ -17,6 +17,7 @@ for i in range(m):
 h = []
 hq.heappush(h, (0, (1, 0)))
 dist[1][0] = 0
+k = min(k, m)
 
 while h:
     cur = hq.heappop(h)
@@ -28,7 +29,7 @@ while h:
     for nxt in arr[x]:
         nc, nx = nxt
 
-        if cnt < k and cnt < n:
+        if cnt < k:
             cost = c
             if cost < dist[nx][cnt+1]:
                 dist[nx][cnt + 1] = cost
