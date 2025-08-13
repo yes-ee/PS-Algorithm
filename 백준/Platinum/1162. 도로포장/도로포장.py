@@ -15,13 +15,12 @@ for i in range(m):
     arr[b].append((c, a))
 
 h = []
-hq.heappush(h, (0, (1, 0)))
+hq.heappush(h, (0, 1, 0))
 dist[1][0] = 0
 k = min(k, m)
 
 while h:
-    cur = hq.heappop(h)
-    c, x, cnt = cur[0], cur[1][0], cur[1][1]
+    c, x, cnt  = hq.heappop(h)
 
     if dist[x][cnt] < c:
         continue
@@ -33,12 +32,11 @@ while h:
             cost = c
             if cost < dist[nx][cnt+1]:
                 dist[nx][cnt + 1] = cost
-                hq.heappush(h, (cost, (nx, cnt + 1)))
+                hq.heappush(h, (cost, nx, cnt + 1))
         
         cost = c + nc
         if cost < dist[nx][cnt]:
             dist[nx][cnt] = cost
-            hq.heappush(h, (cost, (nx, cnt)))
-
+            hq.heappush(h, (cost, nx, cnt))
 
 print(min(dist[n]))
