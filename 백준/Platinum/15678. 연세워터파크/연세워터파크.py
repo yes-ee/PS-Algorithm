@@ -10,22 +10,20 @@ dq = deque()
 for i in range(n):
     # 앞에서부터 idx 밖인 거 pop
     while dq:
-        val, idx = dq[0]
-        if idx < i - d:
+        if dq[0] < i - d:
             dq.popleft()
         else:
             break
-    dp[i] += dq[0][0] if dq and dq[0][0] > 0 else 0
+    dp[i] += dp[dq[0]] if dq and dp[dq[0]] > 0 else 0
     
     # 뒤에서부터 새로운 값보다 큰 값 pop
     while dq:
-        val, idx = dq[-1]
-        if val < dp[i]:
+        if dp[dq[-1]] < dp[i]:
             dq.pop()
         else:
             break
     
     # 새로운 값 추가
-    dq.append((dp[i], i))
+    dq.append(i)
 
 print(max(dp))
