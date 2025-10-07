@@ -1,30 +1,31 @@
 import sys
-import heapq as hq
+from collections import deque
 input = sys.stdin.readline
-push = hq.heappush
-pop = hq.heappop
 
 n, d = map(int, input().split())
-arr = list(map(int, input().split()))
+dp = list(map(int, input().split()))
+dq = deque()
 
-dp = [0 for i in range(n)]
-heap = []
-
+# 모노톤 큐 - 감소하는 수열 유지
 for i in range(n):
-    val, idx = arr[i], i
-    # 범위 밖인 거 pop
-    while heap:
-        val, idx = heap[0]
-        val *= -1
-        val += arr[i]
+    # 앞에서부터 idx 밖인 거 pop
+    while dq:
+        val, idx = dq[0]
         if idx < i - d:
-            pop(heap)
+            dq.popleft()
+        else:
+            break
+    dp[i] += dq[0][0] if dq and dq[0][0] > 0 else 0
+    
+    # 뒤에서부터 새로운 값보다 큰 값 pop
+    while dq:
+        val, idx = dq[-1]
+        if val < dp[i]:
+            dq.pop()
         else:
             break
     
-    # dp, pq에 값 추가
-    max_val = max(val, arr[i])
-    dp[i] = max_val
-    push(heap, (-max_val, i))
+    # 새로운 값 추가
+    dq.append((dp[i], i))
 
 print(max(dp))
